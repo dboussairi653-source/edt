@@ -1,0 +1,22 @@
+.card { box-shadow: 0 2px 10px rgba(0,0,0,.05); }
+.table td, .table th { vertical-align: middle; }
+.card {
+  box-shadow: 0 2px 10px rgba(0,0,0,.05);
+}
+
+/* améliore l’esthétique */
+.card {
+  border: none;
+  border-radius: 8px;
+}
+
+.table td,
+.table th {
+  vertical-align: middle;
+}
+
+/* entête des tableaux */
+.table thead th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+}
