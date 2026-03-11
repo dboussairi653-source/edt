@@ -1,0 +1,149 @@
+.page-title{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  gap:16px;
+  flex-wrap: wrap;
+}
+
+.page-title h4{
+  margin:0;
+  font-weight:900;
+  letter-spacing:-.02em;
+  line-height:1.1;
+}
+
+.page-sub{
+  color: var(--muted);
+  font-size:.92rem;
+  line-height:1.35;
+}
+
+/* GRID */
+.action-grid{
+  display:grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 14px;
+}
+
+/* CARD */
+.action-card{
+  grid-column: span 3;
+  padding: 18px;
+  display:flex;
+  flex-direction:column;
+  gap: 10px;
+  cursor:pointer;
+  text-decoration:none;
+
+  background: color-mix(in srgb, var(--surface) 86%, transparent);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+
+  transition: transform .22s var(--ease),
+              box-shadow .22s var(--ease),
+              border-color .22s var(--ease);
+  will-change: transform;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Spotlight overlay (driven by ui.js vars) */
+.action-card::before{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  opacity:0;
+  pointer-events:none;
+  transition: opacity .22s var(--ease);
+  background: radial-gradient(240px 240px at var(--mx,50%) var(--my,50%),
+              color-mix(in srgb, var(--primary) 30%, transparent),
+              transparent 65%);
+}
+.action-card:hover::before{ opacity:1; }
+
+.action-card:hover{
+  transform: translateY(-6px);
+  border-color: color-mix(in srgb, var(--primary) 36%, var(--border));
+  box-shadow: 0 28px 78px rgba(0,0,0,.55);
+}
+
+/* TOP ROW */
+.action-card .top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 10px;
+}
+
+/* TITLE */
+.action-card .title{
+  font-weight: 900;
+  display:flex;
+  align-items:center;
+  gap: 10px;
+  color: var(--text);
+}
+
+/* DESCRIPTION */
+.action-card .desc{
+  color:var(--muted);
+  font-size:.92rem;
+  margin:0;
+  line-height:1.35;
+}
+
+.action-card .chip{
+  font-size:.78rem;
+  padding:.38rem .62rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--primary) 16%, transparent);
+  border: 1px solid color-mix(in srgb, var(--primary) 30%, var(--border));
+  color: var(--text);
+}
+
+/* RESPONSIVE */
+@media (max-width: 992px){
+  .action-card{ grid-column: span 6; }
+}
+@media (max-width: 576px){
+  .action-card{ grid-column: span 12; }
+}
+
+/* TABLE TOOLBAR */
+.table-toolbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+.table-search{ max-width: 320px; }
+
+/* Fix text visibility in dark mode everywhere */
+:root[data-theme="dark"] .text-muted,
+:root[data-theme="dark"] .form-text,
+:root[data-theme="dark"] small,
+:root[data-theme="dark"] .small,
+:root[data-theme="dark"] .page-sub,
+:root[data-theme="dark"] .card .text-muted{
+  color: rgba(238,234,251,.80) !important;
+}
+
+:root[data-theme="dark"] .form-label{
+  color: rgba(238,234,251,.74) !important;
+}
+
+:root[data-theme="dark"] ::placeholder{
+  color: rgba(238,234,251,.52) !important;
+  opacity: 1;
+}
+
+/* Ensure select dropdowns readable */
+:root[data-theme="dark"] .form-select option{
+  color: var(--text);
+  background: #0E0A1B;
+}

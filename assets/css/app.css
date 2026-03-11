@@ -1,0 +1,327 @@
+/* =========================
+   FUTURISTIC PURPLE THEME
+   Light = violet clair nude
+   Dark  = violet sombre élégant
+   ========================= */
+
+/* DARK (default) */
+:root{
+  /* Purples */
+  --primary:#9D7BFF;
+  --primary-2:#6D3CFF;
+  --accent:#C7B6FF;
+
+  /* Surfaces */
+  --bg:#090612;
+  --surface:#0F0A1F;
+  --surface-2:#140D2B;
+  --border: rgba(255,255,255,.22);
+
+  /* Text */
+  --text:#EEEAFB;
+  --muted: rgba(238,234,251,.78);
+
+  /* Effects */
+  --shadow: 0 22px 60px rgba(0,0,0,.60);
+  --radius: 18px;
+
+  --success:#22C55E;
+  --warning:#F59E0B;
+  --danger:#EF4444;
+
+  /* Compatibility */
+  --card: var(--surface);
+  --stroke: var(--border);
+
+  /* Motion */
+  --ease: cubic-bezier(.2,.8,.2,1);
+  --t: .22s;
+
+  /* Glow */
+  --glow: 0 0 0 rgba(0,0,0,0);
+}
+
+/* LIGHT */
+:root[data-theme="light"]{
+  --primary:#8B5CF6;
+  --primary-2:#6D28D9;
+  --accent:#C4B5FD;
+
+  --bg:#F8F6FF;
+  --surface:#FFFFFF;
+  --surface-2:#F1ECFF;
+  --border: rgba(17,24,39,.12);
+
+  --text:#14111F;
+  --muted: rgba(20,17,31,.62);
+
+  --shadow: 0 18px 45px rgba(20,17,31,.12);
+
+  --success:#16A34A;
+  --warning:#F59E0B;
+  --danger:#DC2626;
+
+  --card: var(--surface);
+  --stroke: var(--border);
+}
+
+/* Make native controls follow theme */
+:root[data-theme="dark"]{ color-scheme: dark; }
+:root[data-theme="light"]{ color-scheme: light; }
+
+html,body{height:100%}
+
+body{
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui,-apple-system,"Segoe UI",Roboto,Arial;
+  overflow-x:hidden;
+}
+
+/* ======= Futuristic animated background (subtle) ======= */
+body::before{
+  content:"";
+  position:fixed;
+  inset:-20%;
+  z-index:-2;
+  pointer-events:none;
+  background:
+    radial-gradient(800px 500px at 12% 18%, color-mix(in srgb, var(--primary) 35%, transparent), transparent 60%),
+    radial-gradient(700px 450px at 88% 22%, color-mix(in srgb, var(--accent) 28%, transparent), transparent 62%),
+    radial-gradient(900px 650px at 50% 90%, color-mix(in srgb, var(--primary-2) 22%, transparent), transparent 65%),
+    linear-gradient(120deg, color-mix(in srgb, var(--surface-2) 38%, transparent), transparent 55%);
+  filter: saturate(1.15);
+  opacity:.95;
+  transform: translate3d(0,0,0);
+  animation: bgFloat 14s var(--ease) infinite alternate;
+}
+
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  pointer-events:none;
+  background:
+    radial-gradient(2px 2px at 15% 25%, rgba(255,255,255,.12) 50%, transparent 52%),
+    radial-gradient(2px 2px at 70% 35%, rgba(255,255,255,.10) 50%, transparent 52%),
+    radial-gradient(1.5px 1.5px at 40% 70%, rgba(255,255,255,.10) 50%, transparent 52%),
+    radial-gradient(1.5px 1.5px at 85% 80%, rgba(255,255,255,.08) 50%, transparent 52%);
+  opacity: .65;
+  animation: stars 10s var(--ease) infinite alternate;
+}
+
+@keyframes bgFloat{
+  from{ transform: translate3d(-1.2%, -1.2%, 0) scale(1.02); }
+  to  { transform: translate3d(1.2%, 1.2%, 0) scale(1.06); }
+}
+@keyframes stars{
+  from{ transform: translateY(0px); opacity:.55; }
+  to  { transform: translateY(-10px); opacity:.75; }
+}
+
+/* ======= Navbar ======= */
+.nav-glass{
+  background: color-mix(in srgb, var(--surface) 78%, transparent)!important;
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(14px);
+}
+
+.navbar-brand{
+  color: var(--text) !important;
+  font-weight: 800;
+  letter-spacing: .4px;
+}
+
+:root[data-theme="light"] .navbar-brand{
+  color: #1b1430 !important;
+}
+
+/* ======= Cards ======= */
+.card{
+  background: color-mix(in srgb, var(--surface) 86%, transparent);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(10px);
+  transition: transform var(--t) var(--ease),
+              box-shadow var(--t) var(--ease),
+              border-color var(--t) var(--ease);
+  position: relative;
+  overflow: hidden;
+}
+
+/* “spotlight” overlay (driven by ui.js via --mx/--my) */
+.card::before{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  pointer-events:none;
+  opacity:.0;
+  transition: opacity var(--t) var(--ease);
+  background: radial-gradient(220px 220px at var(--mx,50%) var(--my,50%),
+              color-mix(in srgb, var(--primary) 28%, transparent),
+              transparent 65%);
+}
+.card:hover::before{ opacity: .9; }
+
+.card:hover{
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--primary) 32%, var(--border));
+  box-shadow: 0 26px 70px rgba(0,0,0,.55);
+}
+
+/* ======= Buttons ======= */
+.btn{ border-radius: 14px; transition: transform var(--t) var(--ease), box-shadow var(--t) var(--ease), filter var(--t) var(--ease); }
+
+.btn-dark{
+  background: linear-gradient(135deg, var(--primary), var(--primary-2));
+  border: 0;
+  color:#fff;
+  box-shadow: 0 14px 38px color-mix(in srgb, var(--primary-2) 22%, transparent);
+}
+.btn-dark:hover{
+  filter: brightness(1.06);
+  transform: translateY(-1px);
+}
+
+.btn-outline-light{
+  border-color: color-mix(in srgb, var(--text) 22%, transparent)!important;
+  color: var(--text)!important;
+}
+.btn-outline-light:hover{
+  background: color-mix(in srgb, var(--text) 10%, transparent)!important;
+}
+
+.btn:active{
+  transform: translateY(0px) scale(.98);
+}
+
+/* Ripple effect helper (ui.js injects span.ripple) */
+.btn{ position:relative; overflow:hidden; }
+.btn .ripple{
+  position:absolute;
+  border-radius:999px;
+  transform: translate(-50%,-50%);
+  pointer-events:none;
+  background: color-mix(in srgb, var(--accent) 35%, transparent);
+  width: 12px; height: 12px;
+  opacity:.9;
+  animation: ripple .65s var(--ease) forwards;
+}
+@keyframes ripple{
+  to{ width: 360px; height: 360px; opacity:0; }
+}
+
+/* ======= Badges ======= */
+.badge-soft{
+  background: color-mix(in srgb, var(--primary) 14%, transparent)!important;
+  border: 1px solid color-mix(in srgb, var(--primary) 28%, var(--border));
+  color: var(--text)!important;
+}
+
+/* ======= Tables ======= */
+.table{
+  --bs-table-bg: transparent;
+  --bs-table-striped-bg: color-mix(in srgb, var(--text) 4%, transparent);
+  --bs-table-color: var(--text);
+  border-color: color-mix(in srgb, var(--text) 16%, transparent)!important;
+}
+.table thead th{
+  color: color-mix(in srgb, var(--text) 92%, transparent);
+  font-weight:800;
+  letter-spacing:.2px;
+}
+.table td, .table th{ vertical-align: middle; }
+
+/* ======= Forms ======= */
+.form-control, .form-select{
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  border: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
+  color: var(--text);
+  border-radius: 14px;
+  transition: border-color var(--t) var(--ease), box-shadow var(--t) var(--ease), transform var(--t) var(--ease);
+}
+.form-control:focus, .form-select:focus{
+  border-color: color-mix(in srgb, var(--primary) 80%, transparent);
+  box-shadow: 0 0 0 .22rem color-mix(in srgb, var(--primary) 18%, transparent);
+  transform: translateY(-1px);
+}
+
+/* options visibility */
+:root[data-theme="dark"] .form-select option{
+  color: var(--text);
+  background: #0E0A1B;
+}
+
+.text-muted{ color: var(--muted)!important; }
+hr{ border-color: color-mix(in srgb, var(--text) 14%, transparent); }
+
+/* Make dark borders slightly brighter */
+:root[data-theme="dark"] .card,
+:root[data-theme="dark"] .nav-glass,
+:root[data-theme="dark"] .form-control,
+:root[data-theme="dark"] .form-select,
+:root[data-theme="dark"] .table,
+:root[data-theme="dark"] .alert {
+  border-color: var(--border) !important;
+}
+
+/* Cursor glow element created by ui.js */
+.fx-cursor{
+  position:fixed;
+  top:0; left:0;
+  width: 520px; height: 520px;
+  border-radius: 999px;
+  pointer-events:none;
+  z-index: 9999;
+  opacity: .0;
+  transform: translate(-50%,-50%);
+  background: radial-gradient(circle,
+    color-mix(in srgb, var(--primary) 18%, transparent) 0%,
+    transparent 62%);
+  filter: blur(2px);
+  transition: opacity .2s var(--ease);
+}
+:root[data-theme="light"] .fx-cursor{
+  background: radial-gradient(circle,
+    color-mix(in srgb, var(--primary) 16%, transparent) 0%,
+    transparent 60%);
+}
+/* =========================
+   Global Back Button
+   ========================= */
+
+.btn-back{
+  background: linear-gradient(135deg, var(--primary), var(--primary-2));
+  border: none;
+  color: #fff;
+  font-weight: 600;
+  padding: .6rem 1.2rem;
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+  transition: all .25s ease;
+  box-shadow: 0 8px 25px rgba(0,0,0,.2);
+}
+
+.btn-back:hover{
+  transform: translateX(-6px);
+  box-shadow: 0 12px 35px rgba(0,0,0,.35);
+}
+
+.btn-back::after{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-100%;
+  width:100%;
+  height:100%;
+  background:rgba(255,255,255,.15);
+  transform:skewX(-20deg);
+  transition:.4s;
+}
+
+.btn-back:hover::after{
+  left:120%;
+}

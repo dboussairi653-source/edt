@@ -1,0 +1,90 @@
+/* =========================
+   animations.css (Scoped & Professional)
+   - No global animations
+   - Only runs on pages we mark with body classes
+   ========================= */
+
+/* Default: NO animations anywhere */
+.action-card,
+.card,
+.table,
+.alert,
+.navbar {
+  animation: none !important;
+  transition: none;
+}
+
+/* Smooth transitions are OK globally (do not move layout) */
+.action-card,
+.card,
+.btn,
+.form-control,
+.form-select {
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease, background-color .18s ease;
+}
+
+/* Keyframes */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* =========================
+   ONLY Emploi du temps page
+   Put this in timetable page:
+   <body class="page-timetable">
+   ========================= */
+
+/* Animate timetable cards/sections only */
+.page-timetable .card,
+.page-timetable .table,
+.page-timetable .alert {
+  animation: fadeUp .35s ease both;
+}
+
+/* If you have timetable entry blocks (optional)
+   Add class in HTML only if it exists, otherwise harmless */
+.page-timetable .timetable-entry,
+.page-timetable .event-item,
+.page-timetable .slot {
+  animation: fadeUp .35s ease both;
+}
+
+/* Stagger effect (professional, subtle)
+   Works if you have multiple cards in a list/grid */
+.page-timetable .action-card:nth-child(1),
+.page-timetable .card:nth-child(1) { animation-delay: .02s; }
+.page-timetable .action-card:nth-child(2),
+.page-timetable .card:nth-child(2) { animation-delay: .05s; }
+.page-timetable .action-card:nth-child(3),
+.page-timetable .card:nth-child(3) { animation-delay: .08s; }
+.page-timetable .action-card:nth-child(4),
+.page-timetable .card:nth-child(4) { animation-delay: .11s; }
+.page-timetable .action-card:nth-child(5),
+.page-timetable .card:nth-child(5) { animation-delay: .14s; }
+.page-timetable .action-card:nth-child(6),
+.page-timetable .card:nth-child(6) { animation-delay: .17s; }
+
+/* =========================
+   OPTIONAL: Animate modals / toasts if you use them
+   ========================= */
+.page-timetable .modal.show .modal-dialog {
+  animation: fadeUp .22s ease both;
+}
+
+/* =========================
+   Accessibility: Reduce motion
+   ========================= */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

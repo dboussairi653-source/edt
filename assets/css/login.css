@@ -1,0 +1,211 @@
+/* assets/css/login.css */
+
+/* Page login only */
+body.page-login{
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Background: aurora + grid */
+body.page-login::before{
+  content:"";
+  position: fixed;
+  inset:-20%;
+  background:
+    radial-gradient(900px 500px at 20% 15%, rgba(168,85,247,.35), transparent 60%),
+    radial-gradient(800px 520px at 80% 25%, rgba(139,92,246,.28), transparent 62%),
+    radial-gradient(900px 600px at 50% 85%, rgba(124,58,237,.24), transparent 62%),
+    linear-gradient(180deg, rgba(255,255,255,.0), rgba(255,255,255,.0));
+  filter: blur(0px);
+  pointer-events:none;
+  z-index:0;
+  animation: loginAurora 10s ease-in-out infinite alternate;
+}
+
+body.page-login::after{
+  content:"";
+  position: fixed;
+  inset:0;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(255,255,255,.0), rgba(0,0,0,.18)),
+    linear-gradient(rgba(124,58,237,.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(124,58,237,.10) 1px, transparent 1px);
+  background-size: auto, 38px 38px, 38px 38px;
+  opacity: .55;
+  pointer-events:none;
+  z-index:0;
+  mask-image: radial-gradient(circle at 50% 30%, black 0%, black 55%, transparent 78%);
+}
+
+@keyframes loginAurora{
+  0%{ transform: translate3d(0,0,0) scale(1); }
+  100%{ transform: translate3d(-2%, 1%, 0) scale(1.03); }
+}
+
+/* Layout wrapper */
+.login-wrap{
+  position: relative;
+  z-index: 1;
+  min-height: calc(100vh - 86px);
+  display: grid;
+  place-items: center;
+  padding: 34px 12px 46px;
+}
+
+/* “Glass” card */
+.login-card{
+  width: min(920px, 96vw);
+  display: grid;
+  grid-template-columns: 1.05fr .95fr;
+  gap: 18px;
+  padding: 18px;
+  border-radius: 22px;
+  background: color-mix(in srgb, var(--surface) 72%, transparent);
+  border: 1px solid color-mix(in srgb, var(--border) 85%, transparent);
+  box-shadow: 0 30px 70px rgba(0,0,0,.28);
+  backdrop-filter: blur(16px);
+  overflow: hidden;
+  transform: translateY(8px);
+  opacity: 0;
+  animation: loginPop .55s cubic-bezier(.2,.9,.2,1) forwards;
+}
+
+@keyframes loginPop{
+  to{ transform: translateY(0); opacity: 1; }
+}
+
+/* Left “hero” panel */
+.login-hero{
+  border-radius: 18px;
+  padding: 22px;
+  background:
+    radial-gradient(600px 300px at 30% 20%, rgba(168,85,247,.28), transparent 60%),
+    radial-gradient(520px 360px at 80% 40%, rgba(99,102,241,.18), transparent 60%),
+    linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+  border: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
+  position: relative;
+  overflow: hidden;
+}
+
+.login-hero h2{
+  font-weight: 900;
+  letter-spacing: -.03em;
+  margin: 0 0 6px;
+}
+
+.login-hero p{
+  margin: 0;
+  color: var(--muted);
+  max-width: 38ch;
+}
+
+.hero-badges{
+  margin-top: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.hero-badges span{
+  padding: 8px 10px;
+  border-radius: 999px;
+  font-size: .86rem;
+  border: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
+  background: color-mix(in srgb, var(--surface) 70%, transparent);
+}
+
+/* subtle floating particles */
+.login-hero .spark{
+  position:absolute;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: rgba(168,85,247,.55);
+  filter: blur(.2px);
+  opacity: .7;
+  animation: sparkFloat 6s ease-in-out infinite;
+}
+
+.login-hero .spark.s1{ left: 12%; top: 18%; animation-delay: .0s; }
+.login-hero .spark.s2{ left: 76%; top: 22%; animation-delay: .8s; width: 8px; height: 8px; opacity: .55; }
+.login-hero .spark.s3{ left: 24%; top: 72%; animation-delay: 1.2s; width: 7px; height: 7px; opacity: .5; }
+.login-hero .spark.s4{ left: 82%; top: 78%; animation-delay: 1.8s; width: 6px; height: 6px; opacity: .45; }
+
+@keyframes sparkFloat{
+  0%{ transform: translate3d(0,0,0); }
+  50%{ transform: translate3d(0,-12px,0); }
+  100%{ transform: translate3d(0,0,0); }
+}
+
+/* Right form panel */
+.login-form{
+  border-radius: 18px;
+  padding: 22px;
+  background: color-mix(in srgb, var(--surface) 86%, transparent);
+  border: 1px solid color-mix(in srgb, var(--border) 80%, transparent);
+}
+
+/* Center title “Connexion” */
+.login-form h1{
+  text-align: center;               /* ✅ demandé */
+  font-weight: 900;
+  letter-spacing: -.03em;
+  margin: 2px 0 14px;
+}
+
+/* Form fields */
+.login-form .form-label{
+  font-weight: 650;
+}
+
+.login-form .form-control{
+  height: 46px;
+}
+
+/* Glow button */
+.btn-login{
+  width: 100%;
+  height: 46px;
+  border-radius: 14px;
+  border: 0;
+  color: #fff;
+  font-weight: 800;
+  background: linear-gradient(135deg, #a855f7, #6d28d9);
+  box-shadow:
+    0 16px 30px rgba(124,58,237,.28),
+    0 0 0 1px rgba(255,255,255,.08) inset;
+  position: relative;
+  overflow: hidden;
+  transition: transform .18s ease, filter .18s ease;
+}
+
+.btn-login:hover{
+  transform: translateY(-1px);
+  filter: brightness(1.03);
+}
+
+.btn-login:active{
+  transform: translateY(0);
+}
+
+/* shimmer */
+.btn-login::before{
+  content:"";
+  position:absolute;
+  top:-60%;
+  left:-30%;
+  width: 60%;
+  height: 220%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.28), transparent);
+  transform: rotate(20deg) translateX(-120%);
+  transition: transform .6s ease;
+}
+
+.btn-login:hover::before{
+  transform: rotate(20deg) translateX(260%);
+}
+
+/* Responsive */
+@media (max-width: 900px){
+  .login-card{ grid-template-columns: 1fr; }
+  .login-hero{ display:none; } /* si tu veux le garder, dis-moi */
+}

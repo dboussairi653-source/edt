@@ -2,7 +2,9 @@
 // includes/helpers.php
 declare(strict_types=1);
 
-function e(string $s): string { return htmlspecialchars($s, ENT_QUOTES, 'UTF-8'); }
+function e($s): string {
+  return htmlspecialchars((string)$s, ENT_QUOTES, 'UTF-8');
+}
 
 function redirect(string $path): void {
   header("Location: $path");
